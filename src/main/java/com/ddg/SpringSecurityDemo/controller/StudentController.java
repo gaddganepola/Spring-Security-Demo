@@ -2,6 +2,8 @@ package com.ddg.SpringSecurityDemo.controller;
 
 
 import com.ddg.SpringSecurityDemo.model.Student;
+import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,6 +32,11 @@ public class StudentController {
     public Student addStudent(@RequestBody Student student) {
         students.add(student);
         return student;
+    }
+
+    @GetMapping("csrf")
+    public CsrfToken csrf(HttpServletRequest request) {
+        return (CsrfToken) request.getAttribute("_csrf");
     }
 
 }
